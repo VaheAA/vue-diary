@@ -5,10 +5,10 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      'color-1': '#002B5B',
-      'color-2': '#2B4865',
-      'color-3': '#256D85',
-      'color-4': '#8FE3CF'
+      'color-1': '#334257',
+      'color-2': '#476072',
+      'color-3': '#548CA8',
+      'color-4': '#EEEEEE'
     },
     extend: {}
   },
