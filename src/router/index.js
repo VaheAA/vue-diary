@@ -20,14 +20,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/logout',
-      name: 'Logout',
-      component: Auth,
-      meta: {
-        authType: 'logout'
-      }
-    },
-    {
       path: '/register',
       name: 'Register',
       component: Auth,

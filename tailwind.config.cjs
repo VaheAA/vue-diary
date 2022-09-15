@@ -8,7 +8,8 @@ module.exports = {
       'color-1': '#334257',
       'color-2': '#476072',
       'color-3': '#548CA8',
-      'color-4': '#EEEEEE'
+      'color-4': '#EEEEEE',
+      'color-error': '#ff0033'
     },
     extend: {}
   },
