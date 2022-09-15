@@ -1,10 +1,12 @@
 <template>
-  <div class="main">
+  <div class="h-full">
     <MainHeader />
-    <slot></slot>
+    <main class="h-full flex flex-col justify-center items-center">
+      <slot></slot>
+    </main>
   </div>
 </template>
 
 <script setup>
-import MainHeader from '../navigation/MainHeader.vue';
+import MainHeader from '../header/MainHeader.vue';
 </script>

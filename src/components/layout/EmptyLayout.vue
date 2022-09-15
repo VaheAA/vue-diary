@@ -1,11 +1,13 @@
 <template>
   <div class="empty">
     <MainHeader />
-    <slot></slot>
+    <main>
+      <slot></slot>
+    </main>
   </div>
 </template>
 
 <script setup>
-import MainHeader from '../navigation/MainHeader.vue';
+import MainHeader from '../header/MainHeader.vue';
 
 </script>

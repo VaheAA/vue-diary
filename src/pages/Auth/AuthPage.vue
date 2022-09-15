@@ -1,10 +1,11 @@
 <template>
-  <h1 class="text-3xl">
-    Auth
-  </h1>
+  <div class="flex justify-center items-center">
+    <AuthForm />
+  </div>
 </template>
 
 <script setup>
+import AuthForm from '../../components/form/AuthForm.vue';
 
 </script>
 
