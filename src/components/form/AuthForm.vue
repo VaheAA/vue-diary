@@ -17,21 +17,9 @@
     </div>
     <div class="flex flex-col w-full mb-4">
       <label for="avatar">Avatar</label>
-      <Field class="form-control
-    block
-    w-full
-    px-3
-    py-1.5
-    text-base
-    font-normal
-    text-color-3
-    bg-white bg-clip-padding
-    border border-solid border-color-4
-    rounded
-    transition
-    ease-in-out
-    m-0
-    focus:text-color-3 focus:bg-white focus:border-color-2 focus:outline-none" name="avatar" type="file" />
+      <Field
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-color-3 bg-white bg-clip-padding border border-solid border-color-4 rounded transition ease-in-out m-0 focus:text-color-3 focus:bg-white focus:border-color-2 focus:outline-none"
+        name="avatar" type="file" />
       <ErrorMessage name="avatar" class="text-color-error text-xs" />
     </div>
     <button type="submit"
@@ -44,20 +32,46 @@
 <script setup>
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
+import { supabase } from '../../db/supabase';
+import { useRoute, useRouter } from 'vue-router';
 
 const schema = yup.object({
   email: yup.string().required().email(),
   password: yup.string().required().min(8)
 });
 
+const route = useRoute();
+const router = useRouter();
 defineProps({
   btnText: {
     type: String
   }
 });
 
-function onSubmit(values) {
-  // Submit values to API...
-  alert(JSON.stringify(values, null, 2));
+async function onSubmit(values) {
+  if (route.meta.name === 'Register') {
+    try {
+      const { data: user, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+      });
+      router.push('/');
+    } catch (error) {
+      alert(error.message);
+    }
+  } else {
+    try {
+      const { data: user, error } = await supabase.auth.signIn({
+        email: values.email,
+        password: values.password,
+      });
+      router.push('/');
+      if (error) throw error;
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+
 }
 </script>

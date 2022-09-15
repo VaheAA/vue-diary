@@ -1,6 +1,6 @@
 
 <template>
-  <component :is="isAuth ? MainLayout : EmptyLayout">
+  <component :is="userSession.session ? MainLayout : EmptyLayout">
     <router-view />
   </component>
 </template>
@@ -9,8 +9,16 @@
 import { ref } from 'vue';
 import EmptyLayout from './components/layout/EmptyLayout.vue';
 import MainLayout from './components/layout/MainLayout.vue';
+import { supabase } from './db/supabase';
+import { userSessionStore } from './store/store';
 
-const isAuth = ref(true);
+const userSession = userSessionStore();
+
+
+supabase.auth.onAuthStateChange((event, session) => {
+  userSession.session = session;
+  console.log(userSession.session);
+});
 </script>
 
 
