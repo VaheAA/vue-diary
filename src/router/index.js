@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { userSessionStore } from '../store/store';
 import Home from '../pages/Home.vue';
 import Auth from '../pages/Auth/AuthPage.vue';
-import { userSessionStore } from '../store/store';
+import UserProfile from '../pages/User/UserProfile.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,14 @@ const router = createRouter({
       meta: {
         authType: 'register',
         needsAuth: false
+      }
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: UserProfile,
+      meta: {
+        needsAuth: true
       }
     }
   ]
