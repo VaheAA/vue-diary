@@ -37,10 +37,12 @@ import * as yup from 'yup';
 import { supabase } from '../../db/supabase';
 import { useRoute, useRouter } from 'vue-router';
 import Loading from '../UI/Loading.vue';
+import { userSessionStore } from '../../store/store';
 
 const route = useRoute();
 const router = useRouter();
-
+const userSession = userSessionStore();
+const { toast } = userSession;
 const isLoading = ref(false);
 
 const schema = yup.object({
@@ -49,14 +51,13 @@ const schema = yup.object({
   username: route.name === 'Register' && yup.string().required().min(8)
 });
 
-
 defineProps({
   btnText: {
     type: String
   }
 });
 
-async function onSubmit(values) {
+async function onSubmit (values) {
   if (route.name === 'Register') {
     try {
       isLoading.value = true;
@@ -70,10 +71,13 @@ async function onSubmit(values) {
           }
         });
       isLoading.value = false;
+      if (error) throw error;
       router.push('/');
     } catch (error) {
       isLoading.value = false;
-      alert(error.message);
+      toast.message = error.message;
+      toast.isOpen = true;
+      toast.status = 'error';
     }
   } else {
     try {
@@ -83,11 +87,13 @@ async function onSubmit(values) {
         password: values.password,
       });
       isLoading.value = false;
-      router.push('/');
       if (error) throw error;
+      router.push('/');
     } catch (error) {
       isLoading.value = false;
-      alert(error.message);
+      toast.message = error.message;
+      toast.isOpen = true;
+      toast.status = 'error';
     }
   }
 

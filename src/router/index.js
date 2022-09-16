@@ -3,6 +3,7 @@ import { userSessionStore } from '../store/store';
 import Home from '../pages/Home.vue';
 import Auth from '../pages/Auth/AuthPage.vue';
 import UserProfile from '../pages/User/UserProfile.vue';
+import UpdateProfile from '../pages/User/UpdateProfile.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,14 @@ const router = createRouter({
       path: '/profile',
       name: 'Profile',
       component: UserProfile,
+      meta: {
+        needsAuth: true
+      }
+    },
+    {
+      path: '/update-profile',
+      name: 'Update Profile',
+      component: UpdateProfile,
       meta: {
         needsAuth: true
       }

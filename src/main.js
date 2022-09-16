@@ -10,9 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
   faUserSecret,
   faUser,
-  faSpinner
+  faSpinner,
+  faCircleXmark
 } from '@fortawesome/free-solid-svg-icons';
-library.add(faUserSecret, faUser, faSpinner);
+library.add(faUserSecret, faUser, faSpinner, faCircleXmark);
 const pinia = createPinia();
 const app = createApp(App);
 
