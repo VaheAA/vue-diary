@@ -11,9 +11,7 @@ import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import AuthForm from '../../components/form/AuthForm.vue';
 import Toast from '../../components/UI/toast/Toast.vue';
-import { userSessionStore } from '../../store/store';
 
-const userSession = userSessionStore();
 const title = ref('');
 const btnText = ref('');
 const route = useRoute();

@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia';
+import { supabase } from '../db/supabase';
 
 export const userSessionStore = defineStore({
   id: 'userSession',
   state: () => ({
+    user: null,
     session: null,
     error: null,
     toast: {
@@ -10,5 +12,10 @@ export const userSessionStore = defineStore({
       isOpen: false,
       status: ''
     }
-  })
+  }),
+  actions: {
+    getUser() {
+      this.user = supabase.auth.user();
+    }
+  }
 });
