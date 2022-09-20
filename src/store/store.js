@@ -16,6 +16,11 @@ export const userSessionStore = defineStore({
   actions: {
     getUser() {
       this.user = supabase.auth.user();
+    },
+    openToast(message, status) {
+      this.toast.message = message;
+      this.toast.status = status;
+      this.toast.isOpen = true;
     }
   }
 });

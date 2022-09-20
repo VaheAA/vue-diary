@@ -2,7 +2,6 @@
   <div class="flex justify-center flex-col items-center">
     <h2 class="text-center text-3xl mb-4">{{title}}</h2>
     <AuthForm :btn-text="btnText" />
-    <Toast />
   </div>
 </template>
 
@@ -10,7 +9,6 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import AuthForm from '../../components/form/AuthForm.vue';
-import Toast from '../../components/UI/toast/Toast.vue';
 
 const title = ref('');
 const btnText = ref('');

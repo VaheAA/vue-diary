@@ -1,7 +1,6 @@
 <template>
   <div class="flex flex-col w-full container mx-auto">
     <UserCard />
-    <!-- <Loading size="3xl" /> -->
     <div>
       <h3 class="text-center text-3xl text-color-1 mb-4">Latest diaries</h3>
       <PostList :posts="posts" v-if="posts" />
@@ -11,7 +10,6 @@
 
 <script setup>
 import UserCard from '../../components/user/UserCard.vue';
-import Loading from '../../components/UI/Loading.vue';
 import { onMounted, ref } from 'vue';
 import PostList from '../../components/posts/PostList.vue';
 

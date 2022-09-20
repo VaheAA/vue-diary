@@ -42,7 +42,7 @@ import { userSessionStore } from '../../store/store';
 const route = useRoute();
 const router = useRouter();
 const userSession = userSessionStore();
-const { toast } = userSession;
+const { openToast } = userSession;
 const isLoading = ref(false);
 
 const schema = yup.object({
@@ -72,12 +72,11 @@ async function onSubmit (values) {
         });
       isLoading.value = false;
       if (error) throw error;
+      openToast('Success', 'success');
       router.push('/');
     } catch (error) {
       isLoading.value = false;
-      toast.message = error.message;
-      toast.isOpen = true;
-      toast.status = 'error';
+      openToast(error.message, 'error');
     }
   } else {
     try {
@@ -89,11 +88,10 @@ async function onSubmit (values) {
       isLoading.value = false;
       if (error) throw error;
       router.push('/');
+      openToast('Success', 'success');
     } catch (error) {
       isLoading.value = false;
-      toast.message = error.message;
-      toast.isOpen = true;
-      toast.status = 'error';
+      openToast(error.message, 'error');
     }
   }
 

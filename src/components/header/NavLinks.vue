@@ -4,6 +4,9 @@
       <li class="mr-4 ml-4" v-if="!userSession.session">
         <router-link class="text-color-4" to='/login'>Login</router-link>
       </li>
+      <li class="mr-4 ml-4" v-if="userSession.session">
+        <router-link class="text-color-4" to='/add-diary'>Add diary</router-link>
+      </li>
       <li class="mr-4 ml-4" v-if="!userSession.session">
         <router-link class="text-color-4" to="/register">Sign Up</router-link>
       </li>

@@ -43,7 +43,7 @@ import { userSessionStore } from '../../store/store';
 const route = useRoute();
 const router = useRouter();
 const userSession = userSessionStore();
-const { toast } = userSession;
+const { openToast } = userSession;
 const isLoading = ref(false);
 
 const blob = ref(null);
@@ -69,20 +69,32 @@ onMounted(() => {
 });
 
 async function onSubmit (values) {
-  const { user, error } = await supabase.auth.update(
-    {
-      data: {
-        username: values.username,
-      }
-    },
-  );
-  if (values.avatar) {
-    const { data, error } = await supabase.storage
-      .from('avatars')
-      .update(`${user.id}/avatar.jpg`, values.avatar, {
-        cacheControl: '3600',
-        upsert: false,
-      });
+  try {
+    isLoading.value = true;
+    const { user, error } = await supabase.auth.update(
+      {
+        data: {
+          username: values.username,
+        }
+      },
+    );
+    if (error) throw error;
+    if (values.avatar) {
+      const { data, error: avatarError } = await supabase.storage
+        .from('avatars')
+        .update(`${user.id}/avatar.jpg`, values.avatar, {
+          cacheControl: '3600',
+          upsert: false,
+        });
+      if (avatarError) throw avatarError;
+    }
+    isLoading.value = false;
+    openToast('Success', '');
+  } catch (error) {
+    isLoading.value = false;
+    toast.message = error.message;
+    toast.isOpen = true;
+    toast.status = 'error';
   }
 }
 </script>

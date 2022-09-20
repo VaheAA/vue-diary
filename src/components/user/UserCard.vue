@@ -3,7 +3,7 @@
     class="border-solid border-2 border-color-3 border-opacity-20 rounded-md p-10 mb-8 relative flex items-center gap-4"
     v-if="user">
     <div>
-      <img class="w-24 h-24 rounded-full" :src="avatar" alt="">
+      <img class="w-24 h-24 rounded-full object-cover" :src="avatar" alt="">
     </div>
     <div class="flex flex-col gap-4">
       <h2 class="text-2xl text-color-1 font-bold">{{user.user_metadata.username}}</h2>
@@ -25,12 +25,14 @@
       Update information
     </router-link>
   </div>
+  <Loading size="3xl" v-else />
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
 import { supabase } from '../../db/supabase';
 import { userSessionStore } from '../../store/store';
+import Loading from '../UI/Loading.vue';
 
 const userSession = userSessionStore();
 

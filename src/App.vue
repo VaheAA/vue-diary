@@ -2,6 +2,7 @@
 <template>
   <component :is="userSession.session ? MainLayout : EmptyLayout">
     <router-view />
+    <Toast />
   </component>
 </template>
 
@@ -11,6 +12,7 @@ import EmptyLayout from './components/layout/EmptyLayout.vue';
 import MainLayout from './components/layout/MainLayout.vue';
 import { supabase } from './db/supabase';
 import { userSessionStore } from './store/store';
+import Toast from './components/UI/toast/Toast.vue';
 
 const userSession = userSessionStore();
 
