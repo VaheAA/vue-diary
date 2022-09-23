@@ -25,7 +25,6 @@
       Update information
     </router-link>
   </div>
-  <Loading size="3xl" v-else />
 </template>
 
 <script setup>

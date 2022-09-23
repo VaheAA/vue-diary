@@ -12,6 +12,13 @@
 import UserCard from '../../components/user/UserCard.vue';
 import { onMounted, ref } from 'vue';
 import PostList from '../../components/posts/PostList.vue';
+import { supabase } from '../../db/supabase';
+import { userSessionStore } from '../../store/store';
+
+
+const userSession = userSessionStore();
+
+const { user, openToast } = userSession;
 
 const posts = ref(null);
 const isOpen = ref(false);
@@ -19,8 +26,12 @@ const isOpen = ref(false);
 onMounted(async () => {
   try {
     isOpen.value = true;
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts?_page=1&_limit=4');
-    const data = await res.json();
+    const { data, error } = await supabase
+      .from('diaries')
+      .select('*')
+      .eq('author_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(4);
     posts.value = data;
     isOpen.value = false;
   } catch (error) {

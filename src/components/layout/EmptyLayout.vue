@@ -1,7 +1,7 @@
 <template>
-  <div class="h-full pt-28">
+  <div class="h-full">
     <MainHeader />
-    <main class="h-full flex flex-col justify-center items-center pt-14">
+    <main class="h-full flex flex-col justify-center items-center pt-42">
       <slot></slot>
     </main>
   </div>
